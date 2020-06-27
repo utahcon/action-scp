@@ -45,6 +45,7 @@ if [ -n "$PRIVATE_KEY" ]; then
     mkdir -p ${HOME}/.ssh
     echo -e "$PRIVATE_KEY" >> ${HOME}/.ssh/id_rsa
     chmod 400 ${HOME}/.ssh/id_rsa
+    ls -al ${HOME}/.ssh/id_rsa
   fi
 fi
 
