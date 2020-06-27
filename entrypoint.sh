@@ -42,13 +42,19 @@ fi
 # Write temporary identity file
 if [ -n "$PRIVATE_KEY" ]; then
   if [ "$PRIVATE_KEY" != "***" ]; then
-    echo -e "$PRIVATE_KEY" >> /tmp/identity
-    chmod 400 /tmp/identity
+    echo -e "$PRIVATE_KEY" >> ${HOME}/.ssh/id_rsa
+    chmod 400 ${HOME}.ssh/id_rsa
   fi
-  ARGUMENTS+=" -i /tmp/identity"
+fi
+
+if [ "$RECURSIVE" == "true" ]; then
+  ARGUMENTS+=" -r"
 fi
 
 (
-  cd "${GITHUG_WORKSPACE}" || exit;
-  scp -o StrictHostKeyChecking=no "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}:${DESTINATION}"
+  cd "${GITHUB_WORKSPACE}" || exit;
+  pwd
+  ls -Al
+  echo scp -o StrictHostKeyChecking=no "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}:${DESTINATION}"
+  scp -v -o StrictHostKeyChecking=no ${ARGUMENTS} ${SOURCE} ${USERNAME}@${SERVER}:${DESTINATION}
 )
