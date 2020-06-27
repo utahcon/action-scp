@@ -41,13 +41,14 @@ fi
 
 # Write temporary identity file
 if [ -n "$PRIVATE_KEY" ]; then
-  echo -e "$PRIVATE_KEY" >> /tmp/identity
+  if [ "$PRIVATE_KEY" != "***" ]; then
+    echo -e "$PRIVATE_KEY" >> /tmp/identity
+    chmod 400 /tmp/identity
+  fi
   ARGUMENTS+=" -i /tmp/identity"
 fi
 
 (
-  if [ -n "${GITHUB_ACTIONS}" ]; then
-    cd "${GITHUG_WORKSPACE}" || exit;
-  fi;
-  scp "${ARGUMENTS}" -J "${DESTINATION}" "${SOURCE}" "${USERNAME}@${SERVER}"
+  cd "${GITHUG_WORKSPACE}" || exit;
+  scp -o StrictHostKeyChecking=no "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}:${DESTINATION}"
 )
