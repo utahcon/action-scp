@@ -41,7 +41,7 @@ fi
 
 # Write temporary identity file
 if [ -n "$PRIVATE_KEY" ]; then
-  echo "$PRIVATE_KEY" >> /tmp/identity
+  echo -e "$PRIVATE_KEY" >> /tmp/identity
   ARGUMENTS+=" -i /tmp/identity"
 fi
 
