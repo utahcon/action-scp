@@ -43,7 +43,7 @@ fi
 if [ -n "$PRIVATE_KEY" ]; then
   if [ "$PRIVATE_KEY" != "***" ]; then
     echo -e "$PRIVATE_KEY" >> ${HOME}/.ssh/id_rsa
-    chmod 400 ${HOME}.ssh/id_rsa
+    chmod 400 ${HOME}/.ssh/id_rsa
   fi
 fi
 
