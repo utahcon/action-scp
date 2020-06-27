@@ -42,6 +42,7 @@ fi
 # Write temporary identity file
 if [ -n "$PRIVATE_KEY" ]; then
   if [ "$PRIVATE_KEY" != "***" ]; then
+    mkdir -p /root/.ssh
     echo -e "$PRIVATE_KEY" >> /root/.ssh/id_rsa
     chmod 400 /root/.ssh/id_rsa
   fi
