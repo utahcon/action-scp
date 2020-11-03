@@ -44,7 +44,7 @@ if [ -n "$PRIVATE_KEY" ]; then
   if [ "$PRIVATE_KEY" != "***" ]; then
     echo "$PRIVATE_KEY" >> /tmp/identity
   fi
-  ARGUMENTS+=" -i /tmp/identity"
+  ARGUMENTS+=" -i /tmp/identity -o StrictHostKeyChecking=no"
 fi
 
 if [ "$RECURSIVE" == "true" ]; then
@@ -65,8 +65,5 @@ fi
 
 (
   cd "${GITHUB_WORKSPACE}" || exit;
-  pwd
-  ls -Al
-  echo "scp ${ARGUMENTS} ${SOURCE} ${USERNAME}@${SERVER}:${DESTINATION}"
-  scp "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}":"${DESTINATION}"
+  scp  "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}":"${DESTINATION}"
 )
