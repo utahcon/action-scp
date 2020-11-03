@@ -1,7 +1,6 @@
-name: scp
+name: OpenSSH Secure File Copy
 description: |
-  scp copies files between hosts on a network.  It uses ssh for data transfer, and uses the same authentication and
-  provides the same security as ssh
+  Use OpenSSH scp to copy files from workspace to your server
 author: utahcon
 branding:
   icon: chevrons-right
