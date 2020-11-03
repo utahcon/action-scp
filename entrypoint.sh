@@ -53,5 +53,5 @@ fi
 
 (
   cd "${GITHUB_WORKSPACE}" || exit;
-  scp "${ARGUMENTS}" -J "${DESTINATION}" "${SOURCE}/" "${USERNAME}@${SERVER}"
+  scp "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}":"${DESTINATION}"
 )
