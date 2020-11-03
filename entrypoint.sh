@@ -51,7 +51,22 @@ if [ "$RECURSIVE" == "true" ]; then
   ARGUMENTS+=" -r"
 fi
 
+if [ -n "$PORT" ]; then
+  ARGUMENTS+=" -P ${PORT}"
+fi
+
+if [ -n "$JUMPS" ]; then
+  ARGUMENTS+=" -J $JUMPS"
+fi
+
+if [ -n "$SSH_OPTIONS" ]; then
+  ARGUMENTS+=" -o $SSH_OPTIONS"
+fi
+
 (
   cd "${GITHUB_WORKSPACE}" || exit;
+  pwd
+  ls -Al
+  echo "scp ${ARGUMENTS} ${SOURCE} ${USERNAME}@${SERVER}:${DESTINATION}"
   scp "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}":"${DESTINATION}"
 )
