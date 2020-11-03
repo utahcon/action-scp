@@ -65,5 +65,8 @@ fi
 
 (
   cd "${GITHUB_WORKSPACE}" || exit;
+  pwd
+  ls -Al
+  echo "scp  ${ARGUMENTS} ${SOURCE} ${USERNAME}@${SERVER}:${DESTINATION}"
   scp  "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}":"${DESTINATION}"
 )
