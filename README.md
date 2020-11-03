@@ -11,7 +11,7 @@ From within your GitHub Workflow simply add a job/step to deploy your codebase t
 ```
 jobs:
   deploy:
-    - uses: utahcon/action-scp@v1
+    - uses: utahcon/action-scp@v1.0.0
       with:
         server: example.org
         username: ${{ secrets.SCP_USERNAME }}
