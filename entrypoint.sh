@@ -11,11 +11,12 @@ while (( "$#" )); do
       3) USERNAME=$1;;
       4) PASSWORD=$1;;
       5) PRIVATE_KEY=$1;;
-      6) SOURCE=$1;;
-      7) DESTINATION=$1;;
-      8) RECURSIVE=$1;;
-      9) JUMPS=$1;;
-      10) SSH_OPTIONS=$1;;
+      6) KNOWN_HOSTS=$1;;
+      7) SOURCE=$1;;
+      8) DESTINATION=$1;;
+      9) RECURSIVE=$1;;
+      10) JUMPS=$1;;
+      11) SSH_OPTIONS=$1;;
     esac
   fi
   arg_pos=$((arg_pos+1))
