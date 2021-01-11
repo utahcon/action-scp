@@ -17,6 +17,7 @@ while (( "$#" )); do
       9) RECURSIVE=$1;;
       10) JUMPS=$1;;
       11) SSH_OPTIONS=$1;;
+      12) VERBOSE=$1;;
     esac
   fi
   arg_pos=$((arg_pos+1))
@@ -72,10 +73,14 @@ if [ -n "$SSH_OPTIONS" ]; then
   ARGUMENTS+=" -o $SSH_OPTIONS"
 fi
 
+if [ -n "$VERBOSE" ];  then
+  ARGUMENTS+=" -vvvv"
+fi
+
 (
   cd "${GITHUB_WORKSPACE}" || exit;
   pwd
   ls -Al
-  echo "scp  ${ARGUMENTS} ${SOURCE} ${USERNAME}@${SERVER}:${DESTINATION}"
-  scp  "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}":"${DESTINATION}"
+  echo "scp ${ARGUMENTS} ${SOURCE} ${USERNAME}@${SERVER}:${DESTINATION}"
+  scp "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}":"${DESTINATION}"
 )

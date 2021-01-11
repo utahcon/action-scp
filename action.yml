@@ -107,6 +107,9 @@ inputs:
             UpdateHostKeys
             User
             VerifyHostKeyDNS
+  verbose:
+    description: Enable verbose output from scp
+    default: false
 
 runs:
   using: docker
@@ -123,3 +126,4 @@ runs:
     - ${{ inputs.recursive }}
     - ${{ inputs.jumps }}
     - ${{ inputs.ssh-options }}
+    - ${{ inputs.verbose }}
