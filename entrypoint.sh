@@ -39,6 +39,14 @@ if [ -z "$PRIVATE_KEY" ]; then
   fi
 fi
 
+# Write temporary known_hosts file
+if [ -n "$KNOWN_HOSTS" ]; then
+  if [ "$KNOWN_HOSTS" != "***" ]; then
+    echo "$KNOWN_HOSTS" >> /tmp/known_hosts
+  fi
+  ARGUMENTS+=" -o UserKnownHostsFile=/tmp/known_hosts"
+fi
+
 # Write temporary identity file
 if [ -n "$PRIVATE_KEY" ]; then
   if [ "$PRIVATE_KEY" != "***" ]; then

@@ -21,6 +21,9 @@ inputs:
   private-key:
     description: Private key used for key-based identity (use Github Secrets only!)
     required: false
+  known-hosts:
+    description: Known host file (use Github Secrets only!)
+    required: false
   source:
     description: "Path you wish to send to remote host. Default: '.'"
     required: true
@@ -103,7 +106,6 @@ inputs:
             TCPKeepAlive
             UpdateHostKeys
             User
-            UserKnownHostsFile
             VerifyHostKeyDNS
 
 runs:
@@ -115,6 +117,7 @@ runs:
     - ${{ inputs.username }}
     - ${{ inputs.password }}
     - ${{ inputs.private-key }}
+    - ${{ inputs.known-hosts }}
     - ${{ inputs.source }}
     - ${{ inputs.destination }}
     - ${{ inputs.recursive }}
