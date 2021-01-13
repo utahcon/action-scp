@@ -44,6 +44,7 @@ fi
 if [ -n "$PRIVATE_KEY" ]; then
   if [ "$PRIVATE_KEY" != "***" ]; then
     echo "$PRIVATE_KEY" > identity_file
+    chmod 0400 identity_file
   fi
   ARGUMENTS+=" -i identity_file -o StrictHostKeyChecking=no"
 fi
