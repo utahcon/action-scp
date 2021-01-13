@@ -28,6 +28,6 @@ jobs:
         with:
           context: .
           file: ./Containerfile
-          platforms: linux/amd64,linux/arm64,linux386
+          platforms: linux/amd64,linux/arm64,linux/386
           push: true
           tags: utahcon/scp:latest
