@@ -11,13 +11,12 @@ while (( "$#" )); do
       3) USERNAME=$1;;
       4) PASSWORD=$1;;
       5) PRIVATE_KEY=$1;;
-      6) KNOWN_HOSTS=$1;;
-      7) SOURCE=$1;;
-      8) DESTINATION=$1;;
-      9) RECURSIVE=$1;;
-      10) JUMPS=$1;;
-      11) SSH_OPTIONS=$1;;
-      12) VERBOSE=$1;;
+      6) SOURCE=$1;;
+      7) DESTINATION=$1;;
+      8) RECURSIVE=$1;;
+      9) JUMPS=$1;;
+      10) SSH_OPTIONS=$1;;
+      11) VERBOSE=$1;;
     esac
   fi
   arg_pos=$((arg_pos+1))
@@ -41,20 +40,13 @@ if [ -z "$PRIVATE_KEY" ]; then
   fi
 fi
 
-# Write temporary known_hosts file
-if [ -n "$KNOWN_HOSTS" ]; then
-  if [ "$KNOWN_HOSTS" != "***" ]; then
-    echo "$KNOWN_HOSTS" >> /tmp/known_hosts
-  fi
-  ARGUMENTS+=" -o UserKnownHostsFile=/tmp/known_hosts"
-fi
-
 # Write temporary identity file
 if [ -n "$PRIVATE_KEY" ]; then
   if [ "$PRIVATE_KEY" != "***" ]; then
-    echo "$PRIVATE_KEY" >> /tmp/identity
+    echo "$PRIVATE_KEY" > identity_file
+    chmod 0400 identity_file
   fi
-  ARGUMENTS+=" -i /tmp/identity -o StrictHostKeyChecking=no"
+  ARGUMENTS+=" -i identity_file -o StrictHostKeyChecking=no"
 fi
 
 if [ "$RECURSIVE" == "true" ]; then
@@ -79,8 +71,6 @@ fi
 
 (
   cd "${GITHUB_WORKSPACE}" || exit;
-  pwd
-  ls -Al
   echo "scp ${ARGUMENTS} ${SOURCE} ${USERNAME}@${SERVER}:${DESTINATION}"
-  scp "${ARGUMENTS}" "${SOURCE}" "${USERNAME}@${SERVER}":"${DESTINATION}"
+  scp $ARGUMENTS $SOURCE $USERNAME@$SERVER:$DESTINATION
 )
